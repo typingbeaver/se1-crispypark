@@ -13,4 +13,9 @@
         <url-pattern>/stats</url-pattern>
     </servlet-mapping>
 
+    <mime-mapping>
+        <extension>mjs</extension>
+        <mime-type>text/javascript</mime-type>
+    </mime-mapping>
+
 </web-app>
