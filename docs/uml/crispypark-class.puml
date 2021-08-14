@@ -1,0 +1,170 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+frame "cd CrispyPark" {
+
+    class CrispyParkServlet {
+        -max: int
+        -open: int
+        -close: int
+        -spacial: int[]
+    }
+
+    abstract class ParkhausServlet {
+        -name: String
+        -max: int
+        -spacialSpaces: int[]
+        -openingHours: int[]
+
+        <i>NAME(): String
+        <i>max(): int
+        <i>editMax(boolean add)
+        <i>changeOpen(int open)
+        <i>changeClose(int close)
+        <i>specialSpaces(): int[]
+        <i>config(): String
+
+        #doGet(Request req, Response res)
+        #doPost(Request req, Response res)
+        ~getBody(Request req): String
+        locator(CarIF car): int
+
+        <u>~toCurrencyString(int cents): String
+        <u>~toTimeString(long duration): String
+
+    }
+
+    interface LotIF {
+
+    }
+
+    class ParkingLot {
+        -SPACES: List<SpaceIF>
+        -count: int
+
+        +getCount(): int
+        +getSpace(int number): SpaceIF
+        +addSpace()
+        +removeSpace()
+        +setSpaceTypes(int[] amount)
+        +getFreeSpace(DriverType type): SpaceIF
+        +unparkCar(int carNo): CarIF
+        +getCars(): List<CarIF>
+    }
+
+    interface SpaceIF {
+
+    }
+
+    class ParkingSpace {
+        -NO: int
+        -type: DriverType
+        -car: CarIF
+
+        +getNo(): int
+        +getType(): DriverType
+        +setType(DriverType type)
+        +getCar(): CarIF
+        +setCar(CarIF car)
+        +removeCar(): CarIF
+    }
+
+    interface CarIF {
+
+    }
+
+    class Car {
+        -NO: int
+        -LICENSE: String
+        -COLOR: String
+        -TYPE: DriverType
+        -TICKET: TicketIF
+        -space: int
+
+        +getNo(): int
+        +getLicense(): String
+        +getType(): DriverType
+        +getTicket(): TicketIF
+        +getColor(): String
+        +getSpace(): int
+        +setSpace(int space)
+        +toString(): String
+    }
+
+    interface TicketIF {
+
+    }
+
+    abstract class Ticket {
+        -TICKET_ID: String
+        -ENTRANCE: DateTime
+        -TYPE: TicketType
+        -duration: long
+        -parkingRate: int
+
+        <u>+create(int carNo, TicketType type, long entranceTime): Ticket
+        <u>+create(int carNo, TicketType type): Ticket
+        +getID(): String
+        +getTicketType(): TicketType
+        +getEntranceTime(): DateTime
+        +getLeaveTime(): DateTime
+        +leave()
+        +leave(long duration)
+        +getDuration(): long
+        +getDurationSinceEntrance(): long
+        <i>+getPrice():int
+
+    }
+
+    class SimpleTicket {
+        +getPrice(): int
+    }
+
+    class TimeTicket {
+        -TIME_TICKETS: HashMap<Integer, Date>
+
+        +getPrice(): int
+    }
+
+    enum TicketType {
+    NORMAL
+    FAMILY
+    MEMBER
+    MONTHLY
+    -rate: int
+    -color: String
+
+    +getRate(): int
+    +setRate(int rate)
+    +getColor(): String
+    }
+
+    enum DriverType {
+        NORMAL
+        DISABLED
+        WOMEN
+        -color: String
+
+        +getColor(): String
+    }
+
+    ParkingLot .down.|> LotIF
+    ParkingSpace .left.|> SpaceIF
+    Ticket .left.|> TicketIF
+    Car .up.|> CarIF
+
+    CrispyParkServlet -up-|> ParkhausServlet
+    ParkhausServlet *-right- LotIF : contains >
+    ParkingLot *-right- SpaceIF : has >
+    ParkingSpace *-down- DriverType : has >
+    ParkingSpace *-right- CarIF : parks_in <
+    Car *-left- DriverType : has >
+    Car *-right- TicketIF : has >
+    Ticket *-right- TicketType : has >
+    SimpleTicket -down-|> Ticket
+    TimeTicket -down-|> Ticket
+
+}
+
+
+@enduml

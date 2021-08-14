@@ -1,0 +1,47 @@
+@startuml
+
+frame "rd CrispyPark"{
+
+    actor Fahrer
+    actor parkenderFahrer
+    actor Parkhausbetreiber
+
+    rectangle ccm.parkhaus {
+        boundary index.jsp
+        boundary stats.jsp
+    }
+
+    rectangle Parkhaussystem {
+
+        Fahrer <|- parkenderFahrer
+
+        boundary ParkhausAPI
+        boundary pay.jsp
+        boundary settings.jsp
+
+        ' Views
+        Fahrer -down- index.jsp
+        parkenderFahrer -down- pay.jsp
+        Parkhausbetreiber -down- stats.jsp
+        Parkhausbetreiber -down- settings.jsp
+
+        control ParkhausServlet
+        control PayServlet
+        control SettingsServlet
+
+        ' Pay
+        ParkhausServlet .up. PayServlet : <<use>>
+        PayServlet .up. pay.jsp : <<use>>
+
+        ' Parkhaus
+        ParkhausServlet .left. ParkhausAPI : <<use>>
+        ParkhausAPI -up- index.jsp
+        ParkhausAPI -left- stats.jsp
+
+        ' Settings
+        SettingsServlet .up. settings.jsp : <<use>>
+        ' ParkhausServlet <.up.> SettingsServlet : <<use>>
+    }
+
+}
+@enduml

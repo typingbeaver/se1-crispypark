@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+frame "deployment CrispyPark" {
+
+    cloud "SEPP-Infrastruktur" {
+
+        node "SEPP-GitLab" {
+        }
+
+        node "SEPP-Jenkins" {
+        }
+
+        node "SEPP-Tomcat 8" {
+        }
+
+        node "SEPP-SonarQube" {
+        }
+
+        "SEPP-GitLab" --> "SEPP-Jenkins" : Trigger/Fetch
+        "SEPP-Jenkins" -> "SEPP-Jenkins" : war-Compilation
+        "SEPP-Jenkins" --> "SEPP-Tomcat 8" : war-Deployment
+        "SEPP-Jenkins" --> "SEPP-SonarQube": Code Analysis
+
+    }
+
+}
+
+@enduml

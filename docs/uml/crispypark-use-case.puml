@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+frame "ucd CrispyPark"{
+actor Fahrer
+actor parkenderFahrer
+actor Parkhausbetreiber
+
+agent Bank
+
+    rectangle Parkhaussystem {
+        agent Kassenautomat
+
+        Fahrer <|- parkenderFahrer
+
+        Fahrer -- (Parkpreise\nansehen)
+        Fahrer -- (Belegung\nprüfen)
+        Fahrer -- (Öffnungszeiten\nprüfen)
+        Fahrer -- (Kundenkarte\nbeantragen)
+        Fahrer -- (Dauerticket\nkaufen)
+
+        usecase ein [
+            in Parkhaus\neinfahren
+            --
+            <b>extension points
+            besondere Personengruppe
+        ]
+        Fahrer -- ein
+        ein -.> (Parkschein\nziehen) : <<include>>
+        ein <.. (Anspruch auf besondere\nParkplätze) : <<extends>>
+
+        parkenderFahrer -- (aus Parkhaus\nausfahren)
+        usecase bez [
+            Parkschein\nbezahlen
+            --
+            <b>extension points
+            Rabattberechtigt
+        ]
+        (aus Parkhaus\nausfahren) -.> bez : <<include>>
+        bez <|-- (Einfachticket)
+        (Einfachticket) - Kassenautomat
+        bez <|-- (Kundenkarte)
+        (Kundenkarte) -- Bank
+        bez <|-- (Dauerticket)
+        (Dauerticket) -- Bank
+        bez <.. (Rabatt\ngewähren) : <<extends>>
+
+        Parkhausbetreiber -- (Umsatzstatistiken\nansehen)
+        Parkhausbetreiber -- (Auslastungsstatistik\nansehen)
+        Parkhausbetreiber -- (Parkpreise\nanpassen)
+    }
+}
+
+@enduml

@@ -1,0 +1,179 @@
+/**
+ * @overview layout of ccm component parkhaus
+ * @author Manfred Kaul <manfred.kaul@h-brs.de> 2017
+ * @author Niclas Bartsch 2021
+ * @license The MIT License (MIT)
+ */
+
+:host * {
+    font-family: var(--bs-font-sans-serif);
+
+    /* BOOTSTRAP VARS IF BOOTSTRAP ISN'T USED */
+    /*--bs-blue: #0d6efd;*/
+    /*--bs-indigo: #6610f2;*/
+    /*--bs-purple: #6f42c1;*/
+    /*--bs-pink: #d63384;*/
+    /*--bs-red: #dc3545;*/
+    /*--bs-orange: #fd7e14;*/
+    /*--bs-yellow: #ffc107;*/
+    /*--bs-green: #198754;*/
+    /*--bs-teal: #20c997;*/
+    /*--bs-cyan: #0dcaf0;*/
+    /*--bs-white: #fff;*/
+    /*--bs-gray: #6c757d;*/
+    /*--bs-gray-dark: #343a40;*/
+    /*--bs-primary: #0d6efd;*/
+    /*--bs-secondary: #6c757d;*/
+    /*--bs-success: #198754;*/
+    /*--bs-info: #0dcaf0;*/
+    /*--bs-warning: #ffc107;*/
+    /*--bs-danger: #dc3545;*/
+    /*--bs-light: #f8f9fa;*/
+    /*--bs-dark: #212529;*/
+    /*--bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";*/
+    /*--bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;*/
+    /*--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));*/
+}
+
+h3 {
+    border-block-end: thick solid var(--bs-yellow);
+    border-radius: .25rem;
+    color: var(--bs-light);
+    background-color: var(--bs-dark);
+    padding: 1rem;
+    font-size: calc(1.275rem + 0.3vw);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    line-height: 1;
+    max-width: 90%;
+}
+
+span {
+    font-weight: 500;
+}
+
+input,
+button,
+select {
+    color: var(--bs-dark);
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border-radius: .25rem;
+    border-color: var(--bs-dark);
+}
+
+input {
+    padding: 0.1rem;
+    text-align: center;
+    border: thin solid black;
+    max-width: 4rem;
+}
+
+button {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 4px;
+    padding: 0.4rem;
+    cursor: pointer;
+
+    background-color: rgba(0,0,0,.03);
+
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #a0a0a0 !important;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+
+    transition: color .15s ease-in-out,
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+}
+
+button:hover {
+    color: var(--bs-dark);
+    background-color: rgba(0,0,0,.125);
+    border-color: rgba(0,0,0,.125);
+}
+button:active {
+    transform: translateY(1px);
+}
+
+table,
+th,
+td {
+    border: 1px solid var(--bs-dark);
+    border-collapse: collapse;
+    margin:0 auto;
+    text-align:center;
+}
+
+th {
+    color: var(--bs-light);
+    background-color: var(--bs-dark);
+}
+
+td:nth-child(8) {
+    text-align:right;
+}
+
+th,
+td {
+    padding: .25rem;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+caption {
+    font-size: larger;
+    font-weight:  200;
+}
+
+.garage {
+    border: medium solid var(--bs-dark);
+    border-radius: .25rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    min-height: 5rem;
+    background-color: #DDD;
+}
+
+.exit_car_container {
+    display: inline-block;
+}
+
+.car, .space {
+    padding: .15rem;
+    width: 5rem;
+    height: 5rem;
+    display: inline-block;
+}
+
+.car {
+    cursor: pointer;
+}
+
+.counter {
+    width: 1rem;
+}
+
+.errors {
+    margin: 1rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    border: thick solid var(--bs-danger);
+    border-radius: .5rem;
+    color: var(--bs-danger);
+}

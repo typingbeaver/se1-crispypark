@@ -1,0 +1,35 @@
+@startuml
+
+actor User
+boundary ccm.parkhaus
+control ParkhausServlet
+entity Car
+participant Ticket
+entity "SingleTicket/\nTimeTicket"
+participant TicketType
+entity ParkingLot
+entity Space
+
+User -> ccm.parkhaus: Enter button
+ccm.parkhaus -> ParkhausServlet: "enter" event
+activate ParkhausServlet
+ParkhausServlet -> Car: instantiate
+activate Car
+Car -> Ticket: Factory Method:\ncreate()
+Ticket -> "SingleTicket/\nTimeTicket": instantiate
+activate "SingleTicket/\nTimeTicket"
+"SingleTicket/\nTimeTicket" -> TicketType: getRate()
+TicketType --> "SingleTicket/\nTimeTicket": return rate
+return Ticket
+Ticket --> Car: Ticket
+return Car
+ParkhausServlet -> ParkingLot: findFreeSpace(DriverType)
+activate ParkingLot
+ParkingLot -> ParkingLot: search for\nfree space
+return space
+ParkhausServlet -> Space: set Car
+ParkhausServlet -> Car: set space no.
+return space no.
+ccm.parkhaus --> User: display car
+
+@enduml

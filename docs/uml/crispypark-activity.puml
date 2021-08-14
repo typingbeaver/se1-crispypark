@@ -1,0 +1,25 @@
+@startuml
+
+title CrisparkPark Pay
+
+|PayServlet|
+start
+:doGet();
+if (license parameter) then (true)
+    :dispatch request\nto ParkhausServlet\n--> include;
+    |ParkhausServlet|
+    :get car from lot;
+    if (car found) then (true)
+        :set car attributes;
+    else (false)
+        :set error message;
+    endif
+else (false)
+endif
+|PayServlet|
+:dispatch request\n--> redirect view;
+|pay.jsp|
+:show view;
+stop
+
+@enduml
