@@ -1,7 +1,7 @@
 # Semesterprojekt Parkhaus-Simulation <br/> _SE1 Team 28 "Kekse"_
 
 ## Description
-Digital car park with given JS module, Jarkata Servlets and JSP
+Digital car park with given JS module, Jakata Servlets and JSP
 
 ### Course Objectives:
  - Agile programming with User Stories, Scrum and Kanban Board
